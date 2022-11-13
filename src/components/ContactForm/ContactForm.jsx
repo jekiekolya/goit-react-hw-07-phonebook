@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, getContacts } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -12,7 +13,7 @@ import { Form } from './ContactForm.styled';
 function FormAddContact() {
   const contacts = useSelector(getContacts);
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const dispatch = useDispatch();
 
@@ -20,8 +21,8 @@ function FormAddContact() {
     setName(e.currentTarget.value);
   };
 
-  const handleChangeNumber = e => {
-    setNumber(e.currentTarget.value);
+  const handleChangePhone = e => {
+    setPhone(e.currentTarget.value);
   };
 
   const handleSubmit = e => {
@@ -30,15 +31,14 @@ function FormAddContact() {
     const statusValidation = checkEqualValue.call(contacts, name);
     if (statusValidation === 'alert') return;
 
-    dispatch(addContact({ name, number }));
-    Notify.success(`${name} successfully added`);
+    dispatch(addContact({ name, phone }));
     // reset values in form
     resetForm('', '');
   };
 
-  function resetForm(resetName, resetNumber) {
+  function resetForm(resetName, resetPhone) {
     setName(resetName);
-    setNumber(resetNumber);
+    setPhone(resetPhone);
   }
 
   return (
@@ -56,15 +56,15 @@ function FormAddContact() {
       />
 
       <InputField
-        nameLabel="Number"
+        nameLabel="Phone"
         type="tel"
-        name="number"
-        value={number}
+        name="phone"
+        value={phone}
         placeholder="777-77-77"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        title="Phone phone must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
-        onChange={handleChangeNumber}
+        onChange={handleChangePhone}
       />
 
       <Button name="Add contact" />

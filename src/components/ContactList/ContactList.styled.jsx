@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { MdPermContactCalendar } from 'react-icons/md';
 
 export const ContactsList = styled.ul`
-  width: ${p => p.theme.space[7] * 3}px;
+  width: ${p => p.theme.space[7] * 4}px;
 
   padding-left: ${p => p.theme.space[5]}px;
 `;
