@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThreeDots } from 'react-loader-spinner';
 
 import { getIsLoading, getFilteredContacts } from 'redux/selectors';
-import { fetchContacts, deleteContact } from 'redux/operations';
+import { fetchContacts, deleteContact } from 'redux/contacts/operations';
 
 import {
   ContactsList,
